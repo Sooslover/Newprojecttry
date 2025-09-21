@@ -1,3 +1,5 @@
+import "./globals.css";
+
 export const metadata = {
   title: "Prompts Hub",
   description: "Copy and paste practical prompts for ChatGPT",
