@@ -71,8 +71,8 @@ function CopyButton({ text }) {
 
 function PromptMini({ text }) {
   return (
-    <div className="flex items-center justify-between rounded-lg bg-white ring-1 ring-neutral-200 px-3 py-2 dark:bg-neutral-900 dark:ring-neutral-800">
-      <div className="text-[13px] truncate pr-3">{text}</div>
+    <div className="flex min-w-0 items-center justify-between rounded-lg bg-white ring-1 ring-neutral-200 px-3 py-2 dark:bg-neutral-900 dark:ring-neutral-800">
+      <div className="text-[13px] truncate pr-3 break-words hyphens-auto">{text}</div>
       <CopyButton text={text} />
     </div>
   );
@@ -80,12 +80,12 @@ function PromptMini({ text }) {
 
 function PromptCard({ title, body }) {
   return (
-    <div className="rounded-xl bg-white ring-1 ring-neutral-200 p-0 overflow-hidden dark:bg-neutral-900 dark:ring-neutral-800">
-      <div className="flex items-center justify-between px-3 py-2 border-b border-neutral-200 dark:border-neutral-800">
-        <div className="text-[13px] font-medium">{title}</div>
+    <div className="min-w-0 w-full rounded-xl bg-white ring-1 ring-neutral-200 p-0 overflow-hidden dark:bg-neutral-900 dark:ring-neutral-800 print:ring-0">
+      <div className="flex flex-wrap items-center justify-between gap-2 px-3 py-2 border-b border-neutral-200 dark:border-neutral-800">
+        <div className="text-[13px] font-medium min-w-0 truncate pr-2">{title}</div>
         <CopyButton text={body} />
       </div>
-      <pre className="p-3 whitespace-pre-wrap text-[13px] leading-6">{body}</pre>
+      <pre className="p-3 whitespace-pre-wrap text-[13px] leading-6 break-words hyphens-auto overflow-x-auto">{body}</pre>
     </div>
   );
 }
@@ -239,7 +239,7 @@ export default function Page() {
           </Card>
         </div>
 
-        <section id="prompts" className="space-y-3">
+       <section id="prompts" className="space-y-3 scroll-mt-24">
           <h2 className="text-xl font-bold">Prompts library</h2>
           <div className="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
             <div className="flex-1">
