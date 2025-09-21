@@ -92,37 +92,55 @@ function PromptCard({ title, body }) {
 
 // Library items – practical prompts
 const PROMPTS = [
-  { title: "Cold email to a prospect", body: `Write a short, polite cold email to <name> at <company> about <product>. Include one benefit, a 20 minute call ask, and two time options. Use British English.` },
-  { title: "Follow up after a meeting", body: `Draft a follow up email that recaps decisions and actions with owners and due dates. Close with a thanks and a simple next step.` },
-  { title: "LinkedIn post from an article", body: `Turn this article into a LinkedIn post with a hook, three bullets, and a call to comment. Keep it under 120 words.\n\n<URL or text>` },
-  { title: "Meeting agenda builder", body: `Create a 30 minute agenda for a meeting about <topic>. Include goals, three sections with timings, and a closing action review.` },
-  { title: "Customer support reply", body: `Write a friendly support response that acknowledges the issue, gives one fix, and offers a workaround. Ask for confirmation.` },
-  { title: "Jira ticket from notes", body: `Turn these notes into a Jira ticket which includes summary, acceptance criteria in Given/When/Then form, and a clear definition of done.\n\n<notes>` },
-  { title: "SQL from description", body: `Write a SQL query for Postgres: <plain description>. Return the query and a one sentence explanation.` },
-  { title: "Explain a SQL query", body: `Explain what this SQL does in three bullets, then propose a clearer version.\n\n<sql>` },
-  { title: "Regex generator", body: `Create a regex that matches <pattern>. Provide two matching and two non‑matching examples. Explain the parts briefly.` },
-  { title: "Excel formula helper", body: `Write an Excel formula for: <description>. Provide a short explanation and an example row.` },
-  { title: "Google Sheets ArrayFormula", body: `Write a Google Sheets ArrayFormula for: <description>. Include a short explanation.` },
-  { title: "Pandas transformation", body: `Provide pandas code that loads a CSV at /path/file.csv and produces a table with columns which include <cols>. Include one data quality check.` },
-  { title: "Bash one‑liner", body: `Write a safe bash one liner to <task>. Explain flags. Provide a dry run option if applicable.` },
-  { title: "Git commit message", body: `Given this diff, write a conventional commit message which includes a short subject and a 2 line body.\n\n<diff>` },
-  { title: "Dockerfile from Python app", body: `Write a minimal Dockerfile for a Python 3.11 app with requirements.txt and a uvicorn server at app:app on port 8000.` },
-  { title: "API request cURL", body: `Create a cURL example for a POST to <url> with JSON {<body>}. Show headers and a sample response.` },
-  { title: "JSON Schema", body: `Draft a JSON Schema for this object: <description>. Mark required fields and types.` },
-  { title: "Risk review checklist", body: `Review this plan for risks. List security, privacy, and operational risks with a severity and a mitigation for each.\n\n<plan>` },
-  { title: "A/B test plan", body: `Write a simple A/B test plan for <feature>. Include hypothesis, metric, sample size assumption, and run length estimate.` },
-  { title: "KPI brainstorm", body: `Suggest KPIs for <product>. Group them into acquisition, activation, retention, referral, and revenue. Give a one line rationale per KPI.` },
-  { title: "Data extraction to table", body: `Extract entities into a six column table which includes entity, attribute, value, units, source, and confidence. Then add a one paragraph synthesis.\n\n<Text>` },
-  { title: "Rewrite a prompt more safely", body: `Improve this prompt for clarity and safety. Keep it under 80 words and add two guardrail questions.\n\n<prompt>` },
-  { title: "Interview guide", body: `Create a user interview guide for <persona> about <topic>. Include intro, five core questions, two probes per question, and a wrap up.` },
-  { title: "Presentation outline", body: `Create a 6 slide outline for a talk on <topic>. Include title options and speaker notes bullets for each slide.` },
-  { title: "FAQ from documentation", body: `Read this text and output a FAQ with ten Q&A pairs which include short answers.\n\n<Text>` },
-  { title: "Summarise a YouTube video", body: `Summarise this YouTube video in six bullets and one takeaway. Include timestamps if possible.\n\n<url>` },
-  { title: "Translate and localise", body: `Translate to British English and keep technical terms precise. Maintain meaning, shorten where possible, and keep names unchanged.` },
-  { title: "Policy‑aware rewrite", body: `Rewrite this copy to be compliant with <policy>. Replace risky claims with factual statements and add a disclaimer if needed.` },
-  { title: "Roadmap table", body: `Turn these items into a three month roadmap table which includes item, owner, week, risk, and success metric.\n\n<items>` },
+{ title: "Universal: result first then how", body: `Produce the result first which solves the task. Then add a short “How I got here” section. If information is missing, state the assumption in [brackets] and continue. Use British English.
+Job to be done:` },
+{ title: "Universal: plan, result, checks", body: `Plan first. List three to five steps you will take. Produce the result. Then list two checks that show the result meets the request. Use British English.
+Job to be done:` },
+{ title: "Universal: three candidates and a pick", body: `Give three candidate solutions that take different approaches. For each, include a one-line idea, pros, cons, cost to try, and a next step. End with your pick and why. Use British English.
+Job to be done:` },
+{ title: "Universal: decision table + recommendation", body: `Create a decision table. Columns include option, benefits, risks, cost, confidence, verdict. End with a concise recommendation. Use British English.
+Job to be done:` },
+{ title: "Universal: extract structured table + synthesis", body: `Extract a structured table. Columns include entity, attribute, value, units, source, confidence. Then write one paragraph that synthesises the table into an insight. Use British English.
+Job to be done:` },
+{ title: "Universal: rewrite for clarity and brevity", body: `Rewrite for clarity and brevity while preserving meaning. Keep within the word limit given in the job. List three specific edits you made. Use British English.
+Job to be done:` },
+{ title: "Universal: three realistic examples", body: `Generate three realistic examples that show how to apply the idea. Vary by context and difficulty. Use British English.
+Job to be done:` },
+{ title: "Universal: teach and test flow", body: `Create a teach-and-test flow for a beginner. Explain briefly, ask one question, wait for my answer, then continue. Finish with a three-question quiz. Use British English.
+Job to be done:` },
+{ title: "Universal: risk review table", body: `Run a risk review. List security, privacy, and operational risks with severity and a practical mitigation for each. Return a concise table. Use British English.
+Job to be done:` },
+{ title: "Universal: edge cases and failure modes", body: `Find edge cases and failure modes. Return eight cases that include trigger, expected behaviour, and how to test. Use British English.
+Job to be done:` },
+{ title: "Universal: policy-aware rewrite", body: `Write a policy-aware rewrite that complies with the policy named in the job. Replace risky claims with factual statements and add a short disclaimer if needed. Use British English.
+Job to be done:` },
+{ title: "Universal: acceptance criteria (Gherkin)", body: `Create acceptance criteria that are testable. Use Given, When, Then. Include at least one negative case. Use British English.
+Job to be done:` },
+{ title: "Universal: one-page brief", body: `Write a one-page brief for the topic and audience described in the job. Include executive summary, five key facts, risks, open questions, and a recommendation. Use British English.
+Job to be done:` },
+{ title: "Universal: six-bullet synthesis", body: `Turn multiple notes into a single synthesis. Return six bullets and one must-know takeaway at the top in bold. Use British English.
+Job to be done:` },
+{ title: "Universal: 30-minute mini-curriculum", body: `Prepare a mini-curriculum for a 30-minute sprint. Provide three links or actions and a target outcome. Use British English.
+Job to be done:` },
+{ title: "Universal: action items table + summary", body: `Turn notes into action items. Return a table that includes item, owner, due date, and next step. Add a one-paragraph summary. Use British English.
+Job to be done:` },
+{ title: "Universal: follow-up email", body: `Write a polite follow-up that recaps decisions, confirms owners and dates, and offers two time options for a quick check-in. Keep it concise. Use British English.
+Job to be done:` },
+{ title: "Universal: 30-minute agenda", body: `Create a 30-minute meeting agenda. Include goals, three timed sections, and a closing action review. Use British English.
+Job to be done:` },
+{ title: "Universal: KPIs by AARRR", body: `Suggest sensible KPIs and group them into acquisition, activation, retention, referral, and revenue. Provide a one-line rationale and a simple way to measure each. Use British English.
+Job to be done:` },
+{ title: "Universal: 30-60-90 plan", body: `Draft a 30-60-90 plan. Each phase includes three outcomes, the main risks, and one metric. Use British English.
+Job to be done:` },
+{ title: "Universal: one-pager for a feature", body: `Write a one-pager for a feature. Include problem, goals, non-goals, user stories, success metrics, and open questions. Limit to 350 words. Use British English.
+Job to be done:` },
+{ title: "Universal: refactor with tests (diff)", body: `Refactor code for clarity and testability. Return only a unified diff. Then propose three unit tests that cover edge cases. Use British English.
+Job to be done:` },
+{ title: "Universal: explain and improve a snippet", body: `Explain what this query or script does in three bullets. Propose an equivalent version that is clearer. State any change in performance risk. Use British English.
+Job to be done:` },
+{ title: "Universal: safe one-liner or script", body: `Create a safe one-liner or small script that performs the task. Explain the flags. Provide a dry-run version if applicable. Use British English.
+Job to be done:` },
 ];
-
 export default function Page() {
   const [query, setQuery] = useState("");
   const [dark, setDark] = useState(() => {
@@ -169,10 +187,10 @@ export default function Page() {
             <FeatureBadge title="Checks" subtitle="Validation or tests" />
           </div>
           <div className="mt-3 grid md:grid-cols-2 gap-3">
-            <PromptMini text="Rewrite for <audience>. Keep it under 120 words in a neutral tone." />
+            <PromptMini text="Rewrite and paraphrase the following : " />
             <PromptMini text="List the steps you will take. After the result, give two checks to verify it." />
             <PromptMini text="Return a markdown table with columns which include name, reason, and score." />
-            <PromptMini text="Ask three clarifying questions before you start." />
+            <PromptMini text="For the following task, Ask three clarifying questions before you start and give me their answers as options so i can select from them. Job to be done :." />
           </div>
         </Card>
 
@@ -201,7 +219,7 @@ export default function Page() {
         <div className="grid lg:grid-cols-2 gap-4">
           <Card title="Research prompts">
             <div className="grid gap-2">
-              <PromptMini text="List five credible sources on <topic> and explain why each source is relevant." />
+              <PromptMini text="List five credible sources on the following topic and explain why each source is relevant. The topic :" />
               <PromptMini text="Create a comparison table for these approaches which includes strengths, risks, cost, and time to try." />
               <PromptMini text="Write interview questions for <persona> about <topic> which include probes." />
               <PromptMini text="Extract entities into a table which includes entity, attribute, value, units, source, and confidence." />
@@ -225,7 +243,7 @@ export default function Page() {
             <div className="grid gap-2">
               <PromptMini text="You are my writing assistant. When I paste text, you will suggest edits which improve clarity and British English spelling." />
               <PromptMini text="Adapt this message for <stakeholder>. Include one benefit and one clear ask." />
-              <PromptMini text="Act as a tutor for <topic>. Ask a question, wait for my answer, then continue." />
+              <PromptMini text="Act as a tutor for for the following topic. Ask a question, wait for my answer, then continue. The topic : " />
               <PromptMini text="Create a polite follow up email which references our last message and proposes two options." />
             </div>
           </Card>
