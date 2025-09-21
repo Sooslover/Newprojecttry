@@ -1,0 +1,10 @@
+node_modules
+
+.next
+.env
+.env.*
+.DS_Store
+EDF
+'EDF'
+
+# add a .gitignore
